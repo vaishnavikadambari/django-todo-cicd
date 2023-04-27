@@ -1,0 +1,24 @@
+Manual deploy on ec2 steps :
+1. sudo apt-get update
+2. install pip3  - sudo apt install python3-pip
+3. install django - pip3 install django
+4. python3 manage.py migrate
+5. pyhton3 manage.py runserver
+6. to access from browers -  python3 manage.py runserver 0.0.0.0:8000
+7 . to allow access from browser we also need to add inbound rule for port 8000 at cidr - 0.0.0.0/0
+8 Got this error in browser - DisallowedHost at /
+Invalid HTTP_HOST header: '107.23.252.48:8000'. You may need to add '107.23.252.48' to ALLOWED_HOSTS.
+
+To fix this - add 107.23.252.48 to ALLOWED_HOSTS in settings.py file.
+
+To run app in background - nohup python3 manage.py runserver 0.0.0.0:8000 </dev/null &>/dev/null &
+
+To automate - deploy using docker
+1. install docker - sudo apt  install docker.io
+2. create Dockerfile : 
+3. to create image - docker build <paht_of_dockerfile> -t todo-app
+4. to run conatiner - sudo docker run -p 8000:8000 <contianer_id>
+   -p 8000:8000 is for port mapping.
+5. to run container in background - sudo docker run -d -p 8000:8000 <contianer_id>
+
+
